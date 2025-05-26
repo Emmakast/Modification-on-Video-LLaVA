@@ -2,7 +2,7 @@
 
 <div>
 <div align="center">
-    <a href='https://llyx97.github.io/' target='_blank'>Yuanxin Liu<sup>1*</sup></a>&emsp;
+    <a>Arne Eichholtz, Jutte Vijverberg, Emma Kasteleyn, Freek Byrman, Daniel Uyterlinde, Caspar de Jong</a>
 </div>
 
 </div>

@@ -98,13 +98,3 @@ Match Success Rate=100.0
 
 ## License
 This dataset is intended for academic research only. It is under [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).
-
-## Citation
-```bibtex
-@article{liu2024tempcompass,
-  title   = {TempCompass: Do Video LLMs Really Understand Videos?},
-  author  = {Yuanxin Liu and Shicheng Li and Yi Liu and Yuxiang Wang and Shuhuai Ren and Lei Li and Sishuo Chen and Xu Sun and Lu Hou},
-  year    = {2024},
-  journal = {arXiv preprint arXiv: 2403.00476}
-}
-```

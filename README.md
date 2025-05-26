@@ -1,83 +1,18 @@
-<h2 align="center"> <a href="https://arxiv.org/abs/2403.00476">TempCompass: A benchmark to evaluate the temporal perception ability of Video LLMs</a></h2>
-
-<div align="center">
-    <a href='https://arxiv.org/abs/2403.00476'><img src='https://img.shields.io/badge/ArXiv-2403.00476-red'></a>
-    <a href='https://llyx97.github.io/tempcompass/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
-    <a href='https://huggingface.co/spaces/lyx97/TempCompass'><img src='https://img.shields.io/badge/🤗_Hugging_Face-Leaderboard-blue'></a>
-    <a href='https://huggingface.co/datasets/lmms-lab/TempCompass'><img src='https://img.shields.io/badge/🤗_Hugging_Face-Datasets-green'></a>
-</div>
+<h2 align="center">Diagnosing and Addressing Temporal Reasoning Limitations in Video-LLaVA</h2>
 
 <div>
 <div align="center">
     <a href='https://llyx97.github.io/' target='_blank'>Yuanxin Liu<sup>1*</sup></a>&emsp;
-    <a href='https://lscpku.github.io/' target='_blank'>Shicheng Li<sup>1*</sup></a>&emsp;
-    <a href='https://liuyi-pku.github.io/' target='_blank'>Yi Liu<sup>1</sup></a>&emsp;
-    Yuxiang Wang<sup>1</sup>&emsp;
-    <a href='https://renshuhuai-andy.github.io/' target='_blank'>Shuhuai Ren<sup>1</sup></a>&emsp;
-    </br>
-    <a href='https://lilei-nlp.github.io/' target='_blank'>Lei Li<sup>2</sup></a>&emsp;
-    <a href='https://pkucss.github.io/' target='_blank'>Sishuo Chen<sup>1</sup></a>&emsp;
-    <a href='https://xusun26.github.io/' target='_blank'>Xu Sun<sup>1</sup></a>&emsp;
-    <a href='https://houlu369.github.io/' target='_blank'>Lu Hou<sup>3</sup></a>
-</div>
-<div>
-<div align="center">
-    <sup>1</sup>Peking University&emsp;
-    <sup>2</sup>The University of Hong Kong&emsp;
-    <sup>3</sup>Huawei Noah’s Ark Lab
-</div>
-<div align="center">
-    <sup>*</sup>Equal Contribution
 </div>
 
-## 📢 News
+</div>
 
-**[2024-10-30]** 🎉🎉🎉 TempCompass is integrated into [VLMEvalKit](https://github.com/open-compass/VLMEvalKit).
-
-**[2024-08-30]** Results of [Qwen2-VL](https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct), [GPT-4o](https://openai.com/index/hello-gpt-4o/), [MiniCPM-V-2.6](https://huggingface.co/openbmb/MiniCPM-V-2_6), [InternVL-2-8B](https://huggingface.co/OpenGVLab/InternVL2-8B), [LLaVA-OneVision-Qwen-2-7B](https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov) and [InterLM-XComposer-2.5](https://huggingface.co/internlm/internlm-xcomposer2d5-7b) are added to the [leaderboard](https://huggingface.co/spaces/lyx97/TempCompass). GPT-4o establishes the new SoTA!
-
-**[2024-08-08]** Results of [LLaVA-Next-Video](https://github.com/LLaVA-VL/LLaVA-NeXT/blob/inference/docs/LLaVA-NeXT-Video_0716.md), [VILA-1.5](https://github.com/NVlabs/VILA) and [LongVA](https://github.com/EvolvingLMMs-Lab/LongVA) are added to the [leaderboard](https://huggingface.co/spaces/lyx97/TempCompass).
-
-**[2024-07]** 🎉🎉🎉 TempCompass is integrated into [LMMs-Eval](https://lmms-lab.github.io/posts/lmms-eval-0.2/). See [here](#lmms-eval) for usage examples.
-
-**[2024-06-11]** Result of [Reka-core](https://www.reka.ai/news/reka-core-our-frontier-class-multimodal-language-model) is added to the [leaderboard](https://huggingface.co/spaces/lyx97/TempCompass).
-
-**[2024-05-25]** [TempCompass Leaderboard](https://huggingface.co/spaces/lyx97/TempCompass) is available on HuggingFace Space 🤗.
-
-**[2024-05-16]** 🎊🎊🎊 TempCompass is accepted at ACL 2024 Findings!
-
-**[2024-04-14]** Evaluation [result](#eval_result) of [Gemini-1.5-pro](https://deepmind.google/technologies/gemini/pro/), the current SOTA Video LLM, is add.
-
-**[2024-03-23]** The [answer prompt](#answer_prompt) is improved to better guide Video LLMs to follow the desired answer formats. The [evaluation code](#eval) now provides an option to disable the use of ChatGPT.
-
-**[2024-03-12]** 🔥🔥🔥 The evaluation code is released now! Feel free to evaluate your own Video LLMs.
-
-## 🏆 LeaderBoard
-![](./assets/leaderboard.png)
-
-## ✨ Highlights
-### Diverse Temporal Aspects and Task Formats
-- TempCompass encompasses a diverse set of temporal aspects (left) and task formats (right) to comprehensively evaluate the temporal perception capability of Video LLMs.
-![](./assets/overview.png)
-### Conflicting Videos
-- We construct conflicting videos to prevent the models from taking advantage of single-frame bias and language priors.
-![](./assets/conflicting_videos.jpg)
-  
-- 🤔 Can your Video LLM correctly answer the following question for both two videos?
-  
-    <img src="./assets/1021488277.gif" alt="Raw Video" style="float: left; width: 49%; margin-right: 10px;">
-    <img src="./assets/1021488277_reverse.gif" alt="Conflicting Video" style="float: left; width: 49%;">
-    
-    > What is happening in the video?    
-    > A. A person drops down the pineapple    
-    > B. A person pushes forward the pineapple    
-    > C. A person rotates the pineapple    
-    > D. A person picks up the pineapple
+## Below, we have adapted the repository from the TempCompass repository for our experiments with Video-LLaVa:
 
 ## 🚀 Quick Start
 To begin with, clone this repository and install some packages:
 ```shell
-git clone https://github.com/llyx97/TempCompass.git
+git clone https://github.com/llyx97/Modification-on-Video-LLaVa.git
 cd TempCompass
 pip install -r requirements.txt
 ```

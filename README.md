@@ -1,4 +1,4 @@
-<h2 align="center">Diagnosing and Addressing Temporal Reasoning Limitations in Video-LLaVA</h2>
+<h1 align="center">Diagnosing and Addressing Temporal Reasoning Limitations in Video-LLaVA</h1>
 
 <div>
 <div align="center">

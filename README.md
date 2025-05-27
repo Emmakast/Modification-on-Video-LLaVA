@@ -95,7 +95,7 @@ Match Success Rate=100.0
 
 ## Frame Sampling
 For running frame sampling experiments yourself, we include an interactive jupyter notebook. This can be found at `run_video_llava/framesampling_visualizations.ipynb`, and will produce plots like the one below:
-![](./assets/sampling_visualization_1034419625.pdf)
+![](sampling_visualization_1034419625.png)
 
 
 

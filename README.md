@@ -93,8 +93,10 @@ The results of each data point will be saved to `auto_eval_results/video-llava/<
 Match Success Rate=100.0
 ```
 
-## 📈 Data Statistics
-![](./assets/data_statistics.png)
+## Frame Sampling
+For running frame sampling experiments yourself, we include an interactive jupyter notebook. This can be found at 'run_video_llava/framesampling_visualizations.ipynb', and will produce plots like the one below:
+![](./assets/framesampling.png)
+
 
 ## License
 This dataset is intended for academic research only. It is under [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).

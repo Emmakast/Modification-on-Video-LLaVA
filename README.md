@@ -97,7 +97,8 @@ Match Success Rate=100.0
 For running frame sampling experiments yourself, we include an interactive jupyter notebook. This can be found at `run_video_llava/framesampling_visualizations.ipynb`, and will produce plots like the one below:
 ![](sampling_visualization_1034419625.png)
 
-
+## Prompt engineering
+For running prompt engineering experiments, `run_video_llava/prompt_3runs.py` can be used.
 
 ## License
 This dataset is intended for academic research only. It is under [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).

@@ -103,6 +103,14 @@ For running prompt engineering experiments, `run_video_llava/inference_dataset_p
 # select <task_type> from multi-choice, yes_no, caption_matching, (captioning)
 python inference_dataset_prompt_3runs.py --task_type <task_type> --answer_prompt <prompt for specific task>
 ```
+For our research, we use the following prompt suggestions for `<prompt for specific task>`:
+- "Approach the video by thinking about the reasons behind the actions and their order in time, and choose the most relevant option."
+- "Approach the video by thinking about the reasons behind the actions and their order in time, and please answer with yes or no."
+- "Analyze the video frame-by-frame for this event, answer yes or no:"
+- "Choose the option that best matches the visual content of the video."
+- "Does the video show this event happening? Answer yes or no, focusing on timing:"
+- "Consider the beginning, middle, and end of the video. Which caption best summarizes the overall temporal narrative?"Choose the option that best matches the visual content of the video."
+
 During evaluation, run the following command to not overwrite other results: 
 ```shell
 python eval_<task-type>.py --video_llm video-llava --disable_llm --input_path run_video_llava/predictions_prompt --output_path auto_eval_results_prompt

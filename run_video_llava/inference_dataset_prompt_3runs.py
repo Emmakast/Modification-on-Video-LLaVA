@@ -48,21 +48,12 @@ def inference_single_video(video_path, inp, model, processor):
     outputs = tokenizer.decode(output_ids[0, input_ids.shape[1]:]).strip().replace('</s>', '')
     return outputs
 
-
-answer_prompt = {
-    # "multi-choice": "\nBest Option:",     # The old version
-    "multi-choice": "\nApproach the video by thinking about the reasons behind the actions and their order in time, and choose the most relevant option.",
-    "yes_no": "\nAnalyze the video frame-by-frame for this event, answer yes or no:",
-    # "caption_matching": "\nBest Option:",     #The old version
-    "caption_matching": "\nChoose the option that best matches the visual content of the video.",
-    "captioning": ""    # The answer "Generated Caption:" is already contained in the question
-}
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--video_path', default='videos')
     parser.add_argument('--output_path', default='predictions_emma')
     parser.add_argument('--task_type', default='multi-choice', choices=['multi-choice', 'captioning', 'caption_matching', 'yes_no'])
+    paser.add_argument('--answer_prompt', default="\nApproach the video by thinking about the reasons behind the actions and their order in time, and choose the most relevant option.")
     args = parser.parse_args()
 
     # Loading questions
@@ -94,7 +85,7 @@ if __name__ == '__main__':
                 for dim, questions in data.items():
                     predictions[vid][dim] = []
                     for question in questions:
-                        inp = question['question'] + answer_prompt[args.task_type]
+                        inp = question['question'] + args.answer_prompt
                         video_llm_pred = inference_single_video(video_path, inp, model, processor)
                         predictions[vid][dim].append({'question': question['question'], 'answer': question['answer'], 'prediction': video_llm_pred})
 

@@ -98,7 +98,13 @@ For running frame sampling experiments yourself, we include an interactive jupyt
 ![](sampling_visualization_1034419625.png)
 
 ## Prompt engineering
-For running prompt engineering experiments, `run_video_llava/prompt_3runs.py` can be used.
+For running prompt engineering experiments, `run_video_llava/inference_dataset_prompt_3runs.py` can be used. The prompt can be adjusted as desired by running the following command:
+```shell
+# select <task_type> from multi-choice, yes_no, caption_matching, (captioning)
+python inference_dataset_prompt_3runs.py --task_type <task_type> --answer_prompt <prompt for specific task>
+```
+During evaluation, run the following command to not overwrite other results: 
+`python eval_,task-type..py --video_llm video-llava --disable_llm --input_path run_video_llava/predictions_prompt --output_path auto_eval_results_prompt`
 
 ## License
 This dataset is intended for academic research only. It is under [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).

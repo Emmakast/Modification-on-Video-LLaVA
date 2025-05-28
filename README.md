@@ -103,7 +103,7 @@ For running prompt engineering experiments, `run_video_llava/inference_dataset_p
 # select <task_type> from multi-choice, yes_no, caption_matching, (captioning)
 python inference_dataset_prompt_3runs.py --task_type <task_type> --answer_prompt <prompt for specific task>
 ```
-For our research, we use the following prompt suggestions for `<prompt for specific task>`:
+For our research, we use the following prompts for `<prompt for specific task>`:
 - "Approach the video by thinking about the reasons behind the actions and their order in time, and choose the most relevant option."
 - "Approach the video by thinking about the reasons behind the actions and their order in time, and please answer with yes or no."
 - "Analyze the video frame-by-frame for this event, answer yes or no:"

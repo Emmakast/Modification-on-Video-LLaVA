@@ -51,7 +51,7 @@ def inference_single_video(video_path, inp, model, processor):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--video_path', default='videos')
-    parser.add_argument('--output_path', default='predictions_emma')
+    parser.add_argument('--output_path', default='predictions_prompt')
     parser.add_argument('--task_type', default='multi-choice', choices=['multi-choice', 'captioning', 'caption_matching', 'yes_no'])
     paser.add_argument('--answer_prompt', default="\nApproach the video by thinking about the reasons behind the actions and their order in time, and choose the most relevant option.")
     args = parser.parse_args()

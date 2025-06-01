@@ -121,5 +121,8 @@ python eval_<task-type>.py --video_llm video-llava --disable_llm --input_path ru
 ## Optical flow
 For running optical flow experiments, in `processing_video.py` the variable `mode` should be set to `optical_flow_arrow`. This file can be found in `run_video_llava/llava/model/multimodal_encoder/languagebind/video`. Optical flow arrows will then be added to the (prior) sampled frames for each video.
 
+## Time encoding
+For running the time encoding experiments, in the file `run_video_llava/llava/model/llava_arch.py`, the `time_encoding_type` should be set to `None` (for the vanilla model), `Timestamps` or `FrameOrder`.
+
 ## License
 This dataset is intended for academic research only. It is under [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).

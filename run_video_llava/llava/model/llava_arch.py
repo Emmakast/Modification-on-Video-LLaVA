@@ -324,6 +324,45 @@ class LlavaMetaForCausalLM(ABC):
         # else:
         print(keys)
         X_features = [getattr(self, f'encode_{key}s')(X.unsqueeze(0)) for X, key in zip(Xs, keys)]  # expand to get batchsize
+        
+        time_encoding_type=None
+
+        if time_encoding_type in ["Timestamps", "FrameOrder"]:
+            for i, x in enumerate(X_features):
+                if keys[i] == 'video':
+                    tokenizer = AutoTokenizer.from_pretrained("LanguageBind/Video-LLaVA-7B", use_fast=False)
+                    x = x.squeeze(0)
+                    time_list = np.load('/home/scur0554/TempCompass/run_video_llava/time_list.npy')
+                    num_tokens = x.shape[1]
+                    n_tokens_per_frame = num_tokens // len(time_list)
+    
+                    new_x = []
+                    if time_encoding_type == "Timestamps":
+                        for idx, time in enumerate(time_list):
+                            time_str = f"Second: {round(time, 2)}"
+                            time_tokens = tokenizer(time_str, return_tensors="pt", padding=True, truncation=True)
+                            time_input_ids = time_tokens["input_ids"].to(self.get_model().device)
+                            time_embs = self.get_model().embed_tokens(time_input_ids).squeeze(0)
+        
+                            tokens = x[idx * n_tokens_per_frame: (idx + 1) * n_tokens_per_frame].to(self.get_model().device)
+                            added_timestamps = torch.cat([time_embs, tokens], dim=0)
+                            new_x.append(added_timestamps)
+    
+                    elif time_encoding_type=="FrameOrder":
+                        for frame_idx in range(8):
+                            position_str = f"Frame {frame_idx+1}"
+                            position_tokens = tokenizer(position_str, return_tensors="pt", padding=True, truncation=True)
+                            position_input_ids = position_tokens["input_ids"].to(self.get_model().device)
+                            position_embs = self.get_model().embed_tokens(position_input_ids).squeeze(0)
+        
+                            tokens = x[frame_idx * n_tokens_per_frame: (frame_idx + 1) * n_tokens_per_frame].to(self.get_model().device)
+                            added_positions = torch.cat([position_embs, tokens], dim=0)
+                            new_x.append(added_positions)
+    
+                X_features[i] = torch.cat(new_x, dim=0).unsqueeze(0)
+        
+        
+        
         # X_features = []
         # # print(2.5, *[i.shape for i in Xs], keys)  
         # for X, key in zip(Xs, keys):

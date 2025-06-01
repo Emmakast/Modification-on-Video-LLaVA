@@ -331,9 +331,8 @@ class LlavaMetaForCausalLM(ABC):
         # modalities x Frames x Patches/tokens x channels
         X_features = [getattr(self, f'encode_{key}s')(X.unsqueeze(0)) for X, key in zip(Xs, keys)]  # expand to get batchsize
         # modalities x Batch x Frames * Patches/tokens x LMM dim 
-        
-        #print(X_features[0].shape)
-        #torch.Size([1, 2048, 4096])
+
+        time_encoding_type="Timestamps"
 
         # Adding positional embeddings between frames
         for i, x in enumerate(X_features):
@@ -344,27 +343,28 @@ class LlavaMetaForCausalLM(ABC):
                 num_tokens = x.shape[1]
                 n_tokens_per_frame = num_tokens // len(time_list)
 
-                # new_x = []
-                # for idx, time in enumerate(time_list):
-                #     time_str = f"Second: {round(time, 2)}"
-                #     time_tokens = tokenizer(time_str, return_tensors="pt", padding=True, truncation=True)
-                #     time_input_ids = time_tokens["input_ids"].to(self.get_model().device)
-                #     time_embs = self.get_model().embed_tokens(time_input_ids).squeeze(0)
-
-                #     tokens = x[idx * n_tokens_per_frame: (idx + 1) * n_tokens_per_frame].to(self.get_model().device)
-                #     added_timestamps = torch.cat([time_embs, tokens], dim=0)
-                #     new_x.append(added_timestamps)
-
                 new_x = []
-                for frame_idx in range(8):
-                    position_str = f"Frame {frame_idx+1}"
-                    position_tokens = tokenizer(position_str, return_tensors="pt", padding=True, truncation=True)
-                    position_input_ids = position_tokens["input_ids"].to(self.get_model().device)
-                    position_embs = self.get_model().embed_tokens(position_input_ids).squeeze(0)
+                if time_encoding_type == "Timestamps":
+                    for idx, time in enumerate(time_list):
+                        time_str = f"Second: {round(time, 2)}"
+                        time_tokens = tokenizer(time_str, return_tensors="pt", padding=True, truncation=True)
+                        time_input_ids = time_tokens["input_ids"].to(self.get_model().device)
+                        time_embs = self.get_model().embed_tokens(time_input_ids).squeeze(0)
+    
+                        tokens = x[idx * n_tokens_per_frame: (idx + 1) * n_tokens_per_frame].to(self.get_model().device)
+                        added_timestamps = torch.cat([time_embs, tokens], dim=0)
+                        new_x.append(added_timestamps)
 
-                    tokens = x[frame_idx * n_tokens_per_frame: (frame_idx + 1) * n_tokens_per_frame].to(self.get_model().device)
-                    added_positions = torch.cat([position_embs, tokens], dim=0)
-                    new_x.append(added_positions)
+                elif time_encoding_type=="FrameOrder":
+                    for frame_idx in range(8):
+                        position_str = f"Frame {frame_idx+1}"
+                        position_tokens = tokenizer(position_str, return_tensors="pt", padding=True, truncation=True)
+                        position_input_ids = position_tokens["input_ids"].to(self.get_model().device)
+                        position_embs = self.get_model().embed_tokens(position_input_ids).squeeze(0)
+    
+                        tokens = x[frame_idx * n_tokens_per_frame: (frame_idx + 1) * n_tokens_per_frame].to(self.get_model().device)
+                        added_positions = torch.cat([position_embs, tokens], dim=0)
+                        new_x.append(added_positions)
 
             X_features[i] = torch.cat(new_x, dim=0).unsqueeze(0)
 

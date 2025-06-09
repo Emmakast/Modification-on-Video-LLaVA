@@ -2,7 +2,7 @@
 
 <div>
 <div align="center">
-    <a>Arne Eichholtz, Jutte Vijverberg, Emma Kasteleyn, Freek Byrman, Daniel Uyterlinde, Caspar de Jong</a>
+    <a>Arne Eichholtz, Jutte Vijverberg, Emma Kasteleyn, Freek Byrman, Daniel Uyterlinde and Caspar de Jong</a>
 </div>
 
 </div>
